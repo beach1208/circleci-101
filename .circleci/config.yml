@@ -22,4 +22,4 @@ workflows:
       - build2:
       # only run this job if build1 succeeds
           requires:
-            - build
+            - build1
