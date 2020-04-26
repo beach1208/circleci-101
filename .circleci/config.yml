@@ -22,6 +22,15 @@ jobs:
       - checkout
       - run: echo "TestB is done"
       - run: sleep 5
+  commands:
+    sayhello:
+      description: "A very simple command for demonstration purposes"
+      parameters:
+        to:
+          type: string
+          default: "Hello World"
+    steps:
+      - run: echo << parameters.to >>
   
   deploy:
     docker:
@@ -44,8 +53,12 @@ workflows:
       - testb:
           requires:
             - build
+      - commands:
+          requires:
+            - build
       - deploy:
           requires:
             - testa
             - testb
+            - commands
           
